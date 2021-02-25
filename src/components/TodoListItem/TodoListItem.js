@@ -2,14 +2,14 @@ import React, { Component } from "react";
 import "./TodoListItem.sass";
 
 export default class TodoListItem extends Component {
-  state = {
-    done: false,
-    important: false,
-  };
+  // state = {
+  //   done: false,
+  //   important: false,
+  // };
 
   render() {
     const { label, onDeleted, onLabelClick, importantClick } = this.props;
-    const { done, important } = this.state;
+    const { done, important } = this.props;
     let classNames = "TodoListItem";
 
     if (done) {

@@ -57,14 +57,11 @@ export default class App extends Component {
         newItem,
         ...todoData.slice(idx + 1),
       ];
-      console.log("oldState", this.state.todoData);
-      console.log("newArr", newArr);
 
       return {
         todoData: newArr,
       };
     });
-    console.log("state", this.state.todoData);
   };
 
   addItem = (text) => {
