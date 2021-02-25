@@ -1,0 +1,51 @@
+.TodoListItem
+    display: flex
+    justify-content: space-between
+    align-items: center
+
+.todoListItemLabel
+    cursor: pointer
+
+.list-item
+    border: 1px solid #fff
+    padding: 5px
+    margin-bottom: -1px
+    &-item-label
+        cursor: pointer
+
+.list-item
+    &:first-child
+        border-radius: 10px 10px 0 0
+    &:last-child
+        border-radius: 0 0 10px 10px
+
+.fa
+    border-radius: 5px
+    width: 30px
+    height: 30px
+    display: flex
+    align-items: center
+    justify-content: center
+
+    &-exclamation
+        border: 1px solid green
+        color: green
+
+.done
+    text-decoration: line-through
+    .todoListItemLabel
+        opacity: 0.5
+    .btn-outline-success
+        pointer-events: none
+
+.important
+    .fa-exclamation
+        background-color: green
+        color: black
+    .todo-list-item-label
+        color: green
+        font-size: 20px
+        font-weight: 700
+    .todoListItemLabel
+        font-weight: bold
+        color: #000
