@@ -24,7 +24,7 @@ export default class App extends Component {
       done: false,
       id: this.maxId++,
     };
-  }
+  };
 
   toggleDone = (id) => {
     this.setState(({ todoData }) => {
@@ -43,6 +43,7 @@ export default class App extends Component {
         todoData: newArr,
       };
     });
+
   };
 
   toggleImportant = (id) => {
@@ -68,7 +69,7 @@ export default class App extends Component {
     const newItem = this.createNewItem(text);
 
     this.setState(({ todoData }) => {
-      const newArr = [...todoData, newItem];
+      const newArr = [newItem, ...todoData];
       return {
         todoData: newArr,
       };
@@ -83,14 +84,24 @@ export default class App extends Component {
     });
   };
 
+
   render() {
+    console.log(this.state)
+
+    const {todoData} = this.state
+
+    const doneCount = todoData.filter((el) => el.done).length;
+    const quantityItems = todoData.length;
+    const toDo = quantityItems - doneCount;
+    
     return (
       <div className='cover'>
-        <AppHeader />
+        <AppHeader quantityItems={quantityItems} doneCount={doneCount} toDo={toDo} />
         <SearchPanel />
         <TodoList
-          todos={this.state.todoData}
+          todos={todoData}
           onDeleted={this.deleteItem}
+          isDoneFun={this.isDoneFun}
           onLabelClick={this.toggleDone}
           importantClick={this.toggleImportant}
         />

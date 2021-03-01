@@ -2,10 +2,6 @@ import React, { Component } from "react";
 import "./TodoListItem.sass";
 
 export default class TodoListItem extends Component {
-  // state = {
-  //   done: false,
-  //   important: false,
-  // };
 
   render() {
     const { label, onDeleted, onLabelClick, importantClick } = this.props;
