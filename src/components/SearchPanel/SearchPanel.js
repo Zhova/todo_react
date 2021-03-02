@@ -3,12 +3,16 @@ import "./SearchPanel.sass";
 
 import ItemStatusFilter from "../ItemStatusFilter/ItemStatusFilter";
 
-const SearchPanel = () => {
+const SearchPanel = ({ filter }) => {
   const searchText = "search";
   const searchStyle = { fontSize: "15px" };
   return (
     <div className='SearchPanel'>
-      <input className='search' style={searchStyle} placeholder={searchText} />
+      <input
+        className='search defaultInput'
+        style={searchStyle}
+        placeholder={searchText}
+      />
       <ItemStatusFilter />
     </div>
   );

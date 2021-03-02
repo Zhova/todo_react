@@ -86,13 +86,22 @@ export default class App extends Component {
 
 
   render() {
-    console.log(this.state)
 
     const {todoData} = this.state
 
     const doneCount = todoData.filter((el) => el.done).length;
     const quantityItems = todoData.length;
     const toDo = quantityItems - doneCount;
+
+    // const filter = (filterType = '') => {
+    //   todoData.filter((el) => {
+    //     if (filterType === 'done') {
+    //       if (el.done) {
+    //         console.log(el)
+    //       }
+    //     }
+    //   });
+    // }
     
     return (
       <div className='cover'>
