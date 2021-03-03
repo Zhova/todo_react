@@ -84,10 +84,9 @@ export default class App extends Component {
     });
   };
 
-
+  
   render() {
-
-    const {todoData} = this.state
+    const { todoData } = this.state;
 
     const doneCount = todoData.filter((el) => el.done).length;
     const quantityItems = todoData.length;
@@ -102,11 +101,15 @@ export default class App extends Component {
     //     }
     //   });
     // }
-    
+
     return (
       <div className='cover'>
-        <AppHeader quantityItems={quantityItems} doneCount={doneCount} toDo={toDo} />
-        <SearchPanel />
+        <AppHeader
+          quantityItems={quantityItems}
+          doneCount={doneCount}
+          toDo={toDo}
+        />
+        <SearchPanel state={this.state} />
         <TodoList
           todos={todoData}
           onDeleted={this.deleteItem}
