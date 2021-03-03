@@ -19,8 +19,6 @@ export default class AddNewItem extends Component {
       e.preventDefault();
       this.props.addItem(this.state.label);
 
-      document.getElementsByClassName("addNewItemInput")[0].value = "";
-
       this.setState({
         label: "",
       });
@@ -35,6 +33,7 @@ export default class AddNewItem extends Component {
           className='addNewItemInput defaultInput'
           placeholder='Add new task'
           onChange={this.onChangeInput}
+          value={this.state.label}
         />
         <button type='submit' className='btnAddItem btnDefault'>
           add item
