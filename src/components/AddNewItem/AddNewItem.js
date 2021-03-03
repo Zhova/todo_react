@@ -13,8 +13,18 @@ export default class AddNewItem extends Component {
   };
 
   onSubmit = (e) => {
-    e.preventDefault();
-    this.props.addItem(this.state.label);
+    if (this.state.label === "") {
+      alert("поле не может быть пустым");
+    } else {
+      e.preventDefault();
+      this.props.addItem(this.state.label);
+
+      document.getElementsByClassName("addNewItemInput")[0].value = "";
+
+      this.setState({
+        label: "",
+      });
+    }
   };
 
   render() {
