@@ -15,6 +15,8 @@ export default class App extends Component {
       this.createNewItem("bread"),
       this.createNewItem("milk"),
     ],
+    term: "",
+    filterVal: "all",
   };
 
   createNewItem(label) {
@@ -24,7 +26,7 @@ export default class App extends Component {
       done: false,
       id: this.maxId++,
     };
-  };
+  }
 
   toggleDone = (id) => {
     this.setState(({ todoData }) => {
@@ -43,7 +45,6 @@ export default class App extends Component {
         todoData: newArr,
       };
     });
-
   };
 
   toggleImportant = (id) => {
@@ -84,23 +85,53 @@ export default class App extends Component {
     });
   };
 
-  
+  inputSearch = (text) => {
+    this.setState(({ term }) => {
+      return {
+        term: text,
+      };
+    });
+  };
+
+  search(items, term) {
+    if (term.length === 0) {
+      return items;
+    }
+    return items.filter((item) => {
+      return item.label.indexOf(term) > -1;
+    });
+  }
+
+  filter(items, filter) {
+    switch (filter) {
+      case "all":
+        return items;
+      case "active":
+        return items.filter((item) => !item.done);
+      case "done":
+        return items.filter((item) => item.done);
+      default:
+        return items;
+    }
+  }
+
+  filterChange = (e) => {
+    const newVal = e.target.name;
+
+    return this.setState(({ filter }) => {
+      return { filterVal: newVal };
+    });
+  };
+
   render() {
-    const { todoData } = this.state;
+    // console.log(this.state);
+    const { todoData, term, filterVal } = this.state;
 
     const doneCount = todoData.filter((el) => el.done).length;
     const quantityItems = todoData.length;
     const toDo = quantityItems - doneCount;
 
-    // const filter = (filterType = '') => {
-    //   todoData.filter((el) => {
-    //     if (filterType === 'done') {
-    //       if (el.done) {
-    //         console.log(el)
-    //       }
-    //     }
-    //   });
-    // }
+    const visibleItems = this.filter(this.search(todoData, term), filterVal);
 
     return (
       <div className='cover'>
@@ -109,9 +140,13 @@ export default class App extends Component {
           doneCount={doneCount}
           toDo={toDo}
         />
-        <SearchPanel state={this.state} />
+        <SearchPanel
+          filterChange={this.filterChange}
+          filterVal={filterVal}
+          inputSearch={this.inputSearch}
+        />
         <TodoList
-          todos={todoData}
+          todos={visibleItems}
           onDeleted={this.deleteItem}
           isDoneFun={this.isDoneFun}
           onLabelClick={this.toggleDone}
